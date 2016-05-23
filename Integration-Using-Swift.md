@@ -59,8 +59,8 @@
 
     ```swift
     override func viewDidDisappear(animated: Bool) {
-        qualaroo?.removeFromViewController()
-
         super.viewDidDisappear(animated)
+
+        qualaroo?.removeFromViewController()
     }
     ```
