@@ -50,72 +50,11 @@ The typical integration procedure is as follows:
 4. Show a survey with a given ID.
 5. Cleanup: Remove `QualarooMobile` from the hosting view controller.
 
-**Note**: It is very important to remember removing the `QualarooMobile` attachment from the hosting view controller whenever it is no longer necessary and before the view controller is destroyed, otherwise we will incur into a retain cycle.
+	_**Note**: It is very important to remember removing the `QualarooMobile` attachment from the hosting view controller whenever it is no longer necessary and before the view controller is destroyed, otherwise we will incur into a retain cycle._
 
-Let's now proceed with examples using Swift and Objective-C:
+**TIP**: You may also want to check our [Swift](Integration-Using-Swift.md) and [Objective-C]() specific integration instructions.
 
-#### Using Swift
-
-1. Locate and open the source file for the view controller you would like to use as host and add:
-
-    ```swift
-    import QualarooMobileSDK
-    ```
-
-2. Instantiate `QualarooMobile`:
-
-    ```swift
-    var qualaroo: QualarooMobile? {
-        do {
-            return try QualarooMobile(APIKey: "YOUR-API-KEY-HERE")
-        } catch {
-            print("Error instantiating QualarooMobile: \(error)")
-            return nil
-        }
-    }
-    ```
-
-3. Attach the `QualarooMobile` instance to your view controller:
-
-    ```swift
-    override func viewDidAppear(animated: Bool) {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            qualaroo?.attachToViewController(self, atPosition: .BottomRight)
-        } else {
-            qualaroo?.attachToViewController(self, atPosition: .Bottom)
-        }
-
-        super.viewDidAppear(animated)
-    }
-    ```
-
-4. Manually trigger a survey:
-
-    ```swift
-    qualaroo?.showSurvey(YOUR_SURVEY_ID)
-    ```
-
-     **Important:** If you want to force a survey to display overriding the targeting options used upon creation, you may instead use:
-
-    ```swift
-    qualaroo?.showSurvey(YOUR_SURVEY_ID, force: true)
-    ```
-
-5. Removing `QualarooMobile` attachment from the hosting view controller:
-
-    ```swift
-    override func viewDidDisappear(animated: Bool) {
-        qualaroo?.removeFromViewController()
-
-        super.viewDidDisappear(animated)
-    }
-    ```
-
-#### Using Objective-C
-
-PENDING
-
-## Further SDK Documentation
+## SDK Documentation
 
 Please refer to the documentation available [here](http://qualaroo.github.io/iOSMobileSDK/).
 
