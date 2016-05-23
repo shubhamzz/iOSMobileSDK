@@ -52,7 +52,7 @@ The typical integration procedure is as follows:
 
 	_**Note**: It is very important to remember removing the `QualarooMobile` attachment from the hosting view controller whenever it is no longer necessary and before the view controller is destroyed, otherwise we will incur into a retain cycle._
 
-**TIP**: You may also want to check our [Swift](Integration-Using-Swift.md) and [Objective-C]() specific integration instructions.
+**TIP**: You may also want to check our [Swift](https://github.com/qualaroo/iOSMobileSDK/blob/master/Integration-Using-Swift.md) and [Objective-C](https://github.com/qualaroo/iOSMobileSDK/blob/master/Integration-Using-Objective-C.md) specific integration instructions.
 
 ## SDK Documentation
 
