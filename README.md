@@ -61,6 +61,7 @@ Let's now proceed with examples using Swift and Objective-C:
     ```swift
     import QualarooMobileSDK
     ```
+
 2. Instantiate `QualarooMobile`:
 
     ```swift
@@ -88,7 +89,7 @@ Let's now proceed with examples using Swift and Objective-C:
     }
     ```
 
- 4. Manually trigger a survey:
+4. Manually trigger a survey:
 
     ```swift
     qualaroo?.showSurvey(YOUR_SURVEY_ID)
@@ -100,7 +101,7 @@ Let's now proceed with examples using Swift and Objective-C:
     qualaroo?.showSurvey(YOUR_SURVEY_ID, force: true)
     ```
 
-  5. Removing `QualarooMobile` attachment from the hosting view controller:
+5. Removing `QualarooMobile` attachment from the hosting view controller:
 
     ```swift
     override func viewDidDisappear(animated: Bool) {
