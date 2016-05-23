@@ -68,8 +68,6 @@
           <section class="section">
             
             <a href='#qualaroomobilesdk' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='qualaroomobilesdk'>QualarooMobileSDK</h1>
-
-<p>TODO — Document installation and usage both for SDK and 3rd-party app developers.</p>
 <a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>Requirements</h2>
 
 <p>In order to integrate the <code>QualarooMobileSDK</code> into a 3rd-party app, the app must satisfy the following requirements:</p>
@@ -78,35 +76,126 @@
 <li>Minimum deployment target set to iOS 8.0 or later</li>
 <li>Xcode 6 or later</li>
 </ul>
-<a href='#progress_report' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='progress_report'>Progress Report</h2>
+<a href='#integration' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='integration'>Integration</h2>
+
+<p>Integrating and keeping our SDK up-to-date on any of your iOS apps can be as simple as adding one line to your <code>Carthage</code> file (highly recommended) and then adding a few lines into your app&rsquo;s source.</p>
+
+<p>For those that would rather avoid any dependency manager or that would like to manually set up their project dependencies, we will also describe an alternative method based on <a href="https://git-scm.com/docs/git-submodule">git submodules</a>.</p>
+<a href='#using_carthage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='using_carthage'>Using Carthage</h3>
 
 <ol>
-<li><del>Create framework targeting both Objective-C and Swift</del></li>
-<li><del>Allow surveys to be instantiated and displayed on screen</del></li>
-<li><p>[UI] Override custom nudge styles with ones suitable for iPhone and iPad app (<em>in progress</em>)</p>
+<li>Add <code>github &quot;qualaroo/QualarooMobileSDK&quot; ~&gt; 1.0</code> to your <code>Carthage</code> file.</li>
+<li>Run <code>carthage update</code></li>
+<li>Open your Xcode project and add <code>QualarooMobileSDK.framework</code> as an embedded framework on your app&rsquo;s target.</li>
+</ol>
+
+<p>To keep our SDK up-to-date, you will typically only need to run <code>carthage update</code>. If you need a more comprehensive guide on maintaining Carthage dependencies, please refer to <a href="https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile">this guide</a>.</p>
+<a href='#using_as_git_submodule' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='using_as_git_submodule'>Using as Git Submodule</h3>
+
+<p>You probably already know what you are doing if you are following this method, but if you need a guideline, here&rsquo;s a possible procedure:</p>
+
+<ol>
+<li>Run <code>git submodule add github.com:qualaroo/QualarooMobileSDK.git</code></li>
+<li><em>(optionally)</em> Checkout a specific tag:
 
 <ul>
-<li><del>Vertically grow/shrink according to height reported by <code>nodeRendered</code> event (<a href="../../issues/1">#1</a>)</del></li>
-<li><del>Animate resizing and show/hiding events</del></li>
-<li>Incorporate UI changes based on Garth&rsquo;s mobile mockup (ongoing)</li>
+<li><code>
+cd path/to/your/submodule
+git checkout 1.0
+cd .. # back to your SRCROOT
+git commit -m &quot;Using QualarooMobileSDK 1.0&quot;
+</code>
+3. Open your Xcode project and add <code>QualarooMobileSDK.framework</code> as an embedded framework on your app&rsquo;s target.</li>
 </ul></li>
-<li><p><del>Pass device UUID to the Qualaroo API using the <a href="http://help.qualaroo.com/hc/en-us/articles/201956628">Identity API call</a></del></p></li>
-<li><p><del>Change browser agent to <code>QualarooMobileSDK v1.x</code></del> (current implementation requires iOS 9 or later)</p></li>
-<li><p><del>Ensure <code>WKWebView</code> is only visible when survey is running (see <a href="http://help.qualaroo.com/hc/en-us/articles/201447336-Using-Event-Handler-Callbacks">Event Handler Callbacks</a>)</del></p></li>
-<li><p><del>Initialize <code>QualarooSurveyViewController</code> with <code>APIKey</code> and fail early when invalid</del></p></li>
-<li><p>Write test app suite (in process)</p></li>
 </ol>
-<a href='#notes_on_code_style' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='notes_on_code_style'>Notes on Code Style</h2>
+<a href='#code_integration' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='code_integration'>Code Integration</h3>
 
-<p>All the source code written in Objective-C / C in this project is formatted using <a href="http://clang.llvm.org/docs/ClangFormat.html">clang-format</a>. In order to automatically format code when saving a file in Xcode, please make sure you follow the next steps:</p>
+<p><strong>Important:</strong> Our SDK requires a hosting view controller where any Qualaroo Mobile surveys will be displayed.</p>
+
+<p>The typical integration procedure is as follows:</p>
 
 <ol>
-<li>Have <a href="http://alcatraz.io">Alcatraz</a> installed in Xcode (see installation steps on their website.)</li>
-<li>Have the plugin <code>BBUncrustifyPlugin</code> installed with <code>Formatter</code> set to <code>Clang</code>, <code>Perform Xcode syntax-aware indenting</code> disabled, <code>Clang Style</code> set to <code>Custom Style (File)</code>, and <code>Format on Save</code> enabled.</li>
-<li>Or, alternatively, have the plugin <code>ClangFormat</code> installed (at the time of writing, this plugin did not work correctly with Xcode 7.3.)</li>
+<li>Import <code>QualarooMobileSDK</code> into your code (e.g., a view controller)</li>
+<li>Instantiate <code>QualarooMobile</code> by passing a valid API key and check for any errors (instantiation may fail due to an invalid/bogus API key)</li>
+<li>Attach the <code>QualarooMobile</code> instance to your view controller and, optionally, specify an attachment position (bottom or top on iPhone, or a corner on iPad)</li>
+<li>Show a survey with a given ID.</li>
+<li>Cleanup: Remove <code>QualarooMobile</code> from the hosting view controller.</li>
 </ol>
 
-<p>To modify the rules used to format the source code, please modify <code>.clang-format</code>.</p>
+<p><strong>Note</strong>: It is very important to remember removing the <code>QualarooMobile</code> attachment from the hosting view controller whenever it is no longer necessary and before the view controller is destroyed, otherwise we will incur into a retain cycle.</p>
+
+<p>Let&rsquo;s now proceed with examples using Swift and Objective-C:</p>
+<a href='#using_swift' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='using_swift'>Using Swift</h4>
+
+<ol>
+<li>Locate and open the source file for the view controller you would like to use as host and add: 
+
+<ul>
+<li><code>
+import QualarooMobileSDK
+</code>
+2. Instantiate <code>QualarooMobile</code>:
+- <code>
+var qualaroo: QualarooMobile? {
+    do {
+        return try QualarooMobile(APIKey: &quot;YOUR-API-KEY-HERE&quot;)
+    } catch {
+        print(&quot;Error instantiating QualarooMobile: \(error)&quot;)
+        return nil
+    }
+}
+</code></li>
+</ul></li>
+<li><p>Attach the <code>QualarooMobile</code> instance to your view controller:</p>
+
+<ul>
+<li><pre class="highlight plaintext"><code>override func viewDidAppear(animated: Bool) {
+    if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+        qualaroo?.attachToViewController(self, atPosition: .BottomRight)
+    } else {
+        qualaroo?.attachToViewController(self, atPosition: .Bottom)
+    }
+
+    super.viewDidAppear(animated)
+}
+</code></pre>
+
+<ol>
+<li>Manually trigger a survey:</li>
+<li><code>
+qualaroo?.showSurvey(YOUR_SURVEY_ID)
+</code></li>
+</ol></li>
+</ul>
+
+<p><strong>Important:</strong> If you want to force a survey to display overriding the targeting options used upon creation, you may instead use:</p></li>
+</ol>
+<pre class="highlight plaintext"><code> - ```
+     qualaroo?.showSurvey(YOUR_SURVEY_ID, force: true)
+ ```
+</code></pre>
+
+<ol>
+<li><p>Removing <code>QualarooMobile</code> attachment from the hosting view controller:</p>
+
+<ul>
+<li><pre class="highlight plaintext"><code>override func viewDidDisappear(animated: Bool) {
+    qualaroo?.removeFromViewController()
+
+    super.viewDidDisappear(animated)
+}
+</code></pre></li>
+</ul></li>
+</ol>
+<a href='#using_objective_c' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='using_objective_c'>Using Objective-C</h4>
+
+<p>PENDING</p>
+<a href='#further_sdk_documentation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='further_sdk_documentation'>Further SDK Documentation</h2>
+
+<p>Please refer to the documentation available <a href="https://somelink">here</a>.</p>
+<a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
+
+<p>PENDING: Some license goes here.</p>
 
           </section>
         </section>
