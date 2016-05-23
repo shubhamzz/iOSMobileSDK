@@ -1,0 +1,6 @@
+framework module QualarooMobileSDK {
+  umbrella header "QualarooMobileSDK.h"
+
+  export *
+  module * { export * }
+}
