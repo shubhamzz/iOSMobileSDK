@@ -9,17 +9,27 @@
 2. Instantiate `QualarooMobile`:
 
     ```swift
-    var qualaroo: QualarooMobile? {
+    lazy var qualaroo: QualarooMobile? = {
         do {
             return try QualarooMobile(APIKey: "YOUR-API-KEY-HERE")
         } catch {
             print("Error instantiating QualarooMobile: \(error)")
             return nil
         }
-    }
+    }()
     ```
 
 3. Attach the `QualarooMobile` instance to your view controller:
+
+    ```swift
+    override func viewDidAppear(animated: Bool) {
+        qualaroo?.attachToViewController(self)
+
+        super.viewDidAppear(animated)
+    }
+    ```
+
+    Or, if you want to be more specific about the positioning:
 
     ```swift
     override func viewDidAppear(animated: Bool) {
@@ -39,7 +49,7 @@
     qualaroo?.showSurvey(YOUR_SURVEY_ID)
     ```
 
-    ... or, overriding any targeting options used upon creation:
+    Or, overriding any targeting options used upon creation:
 
     ```swift
     qualaroo?.showSurvey(YOUR_SURVEY_ID, force: true)
