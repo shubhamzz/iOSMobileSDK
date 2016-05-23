@@ -115,58 +115,13 @@ git commit -m <span class="s2">"Using QualarooMobileSDK 1.0"</span>
 <li>Instantiate <code>QualarooMobile</code> by passing a valid API key and check for any errors (instantiation may fail due to an invalid/bogus API key)</li>
 <li>Attach the <code>QualarooMobile</code> instance to your view controller and, optionally, specify an attachment position (bottom or top on iPhone, or a corner on iPad)</li>
 <li>Show a survey with a given ID.</li>
-<li>Cleanup: Remove <code>QualarooMobile</code> from the hosting view controller.</li>
+<li><p>Cleanup: Remove <code>QualarooMobile</code> from the hosting view controller.</p>
+
+<p><em><strong>Note</strong>: It is very important to remember removing the <code>QualarooMobile</code> attachment from the hosting view controller whenever it is no longer necessary and before the view controller is destroyed, otherwise we will incur into a retain cycle.</em></p></li>
 </ol>
 
-<p><strong>Note</strong>: It is very important to remember removing the <code>QualarooMobile</code> attachment from the hosting view controller whenever it is no longer necessary and before the view controller is destroyed, otherwise we will incur into a retain cycle.</p>
-
-<p>Let&rsquo;s now proceed with examples using Swift and Objective-C:</p>
-<a href='#using_swift' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='using_swift'>Using Swift</h4>
-
-<ol>
-<li><p>Locate and open the source file for the view controller you would like to use as host and add:</p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">QualarooMobileSDK</span>
-</code></pre></li>
-<li><p>Instantiate <code>QualarooMobile</code>:</p>
-<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">qualaroo</span><span class="p">:</span> <span class="kt">QualarooMobile</span><span class="p">?</span> <span class="p">{</span>
-    <span class="k">do</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">try</span> <span class="kt">QualarooMobile</span><span class="p">(</span><span class="kt">APIKey</span><span class="p">:</span> <span class="s">"YOUR-API-KEY-HERE"</span><span class="p">)</span>
-    <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">"Error instantiating QualarooMobile: </span><span class="se">\(</span><span class="n">error</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">nil</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></li>
-<li><p>Attach the <code>QualarooMobile</code> instance to your view controller:</p>
-<pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidAppear</span><span class="p">(</span><span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="kt">UIDevice</span><span class="o">.</span><span class="nf">currentDevice</span><span class="p">()</span><span class="o">.</span><span class="n">userInterfaceIdiom</span> <span class="o">==</span> <span class="o">.</span><span class="kt">Pad</span> <span class="p">{</span>
-        <span class="n">qualaroo</span><span class="p">?</span><span class="o">.</span><span class="nf">attachToViewController</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="nv">atPosition</span><span class="p">:</span> <span class="o">.</span><span class="kt">BottomRight</span><span class="p">)</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">qualaroo</span><span class="p">?</span><span class="o">.</span><span class="nf">attachToViewController</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="nv">atPosition</span><span class="p">:</span> <span class="o">.</span><span class="kt">Bottom</span><span class="p">)</span>
-    <span class="p">}</span>
-
-    <span class="k">super</span><span class="o">.</span><span class="nf">viewDidAppear</span><span class="p">(</span><span class="n">animated</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></li>
-<li><p>Manually trigger a survey:</p>
-<pre class="highlight swift"><code><span class="n">qualaroo</span><span class="p">?</span><span class="o">.</span><span class="nf">showSurvey</span><span class="p">(</span><span class="kt">YOUR_SURVEY_ID</span><span class="p">)</span>
-</code></pre>
-
-<p><strong>Important:</strong> If you want to force a survey to display overriding the targeting options used upon creation, you may instead use:</p>
-<pre class="highlight swift"><code><span class="n">qualaroo</span><span class="p">?</span><span class="o">.</span><span class="nf">showSurvey</span><span class="p">(</span><span class="kt">YOUR_SURVEY_ID</span><span class="p">,</span> <span class="nv">force</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
-</code></pre></li>
-<li><p>Removing <code>QualarooMobile</code> attachment from the hosting view controller:</p>
-<pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidDisappear</span><span class="p">(</span><span class="nv">animated</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">qualaroo</span><span class="p">?</span><span class="o">.</span><span class="nf">removeFromViewController</span><span class="p">()</span>
-
-    <span class="k">super</span><span class="o">.</span><span class="nf">viewDidDisappear</span><span class="p">(</span><span class="n">animated</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></li>
-</ol>
-<a href='#using_objective_c' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='using_objective_c'>Using Objective-C</h4>
-
-<p>PENDING</p>
-<a href='#further_sdk_documentation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='further_sdk_documentation'>Further SDK Documentation</h2>
+<p><strong>TIP</strong>: You may also want to check our <a href="Integration-Using-Swift.md">Swift</a> and <a href="">Objective-C</a> specific integration instructions.</p>
+<a href='#sdk_documentation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='sdk_documentation'>SDK Documentation</h2>
 
 <p>Please refer to the documentation available <a href="http://qualaroo.github.io/iOSMobileSDK/">here</a>.</p>
 <a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
