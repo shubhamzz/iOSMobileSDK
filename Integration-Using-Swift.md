@@ -39,7 +39,7 @@
     qualaroo?.showSurvey(YOUR_SURVEY_ID)
     ```
 
-     **Important:** If you want to force a survey to display overriding the targeting options used upon creation, you may instead use:
+    ... or, overriding any targeting options used upon creation:
 
     ```swift
     qualaroo?.showSurvey(YOUR_SURVEY_ID, force: true)
