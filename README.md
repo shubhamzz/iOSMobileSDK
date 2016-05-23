@@ -28,12 +28,14 @@ You probably already know what you are doing if you are following this method, b
 
 1. Run `git submodule add github.com:qualaroo/QualarooMobileSDK.git`
 2. *(optionally)* Checkout a specific tag:
-	- ```
-	cd path/to/your/submodule
-	git checkout 1.0
-	cd .. # back to your SRCROOT
-	git commit -m "Using QualarooMobileSDK 1.0"
-	```
+
+    ```bash
+    cd path/to/your/submodule
+    git checkout 1.0
+    cd .. # back to your SRCROOT
+    git commit -m "Using QualarooMobileSDK 1.0"
+    ```
+
 3. Open your Xcode project and add `QualarooMobileSDK.framework` as an embedded framework on your app's target.
 
 ### Code Integration
@@ -54,59 +56,66 @@ Let's now proceed with examples using Swift and Objective-C:
 
 #### Using Swift
 
-1. Locate and open the source file for the view controller you would like to use as host and add: 
-    - ```
-    	import QualarooMobileSDK
-      ```
-2. Instantiate `QualarooMobile`:
-	- ```
-    	var qualaroo: QualarooMobile? {
-        	do {
-	            return try QualarooMobile(APIKey: "YOUR-API-KEY-HERE")
-	        } catch {
-	            print("Error instantiating QualarooMobile: \(error)")
-	            return nil
-	        }
-	    }
-	```
-3. Attach the `QualarooMobile` instance to your view controller:
-    - ```
-        override func viewDidAppear(animated: Bool) {
-        	if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            	qualaroo?.attachToViewController(self, atPosition: .BottomRight)
-	        } else {
-    	        qualaroo?.attachToViewController(self, atPosition: .Bottom)
-        	}
+1. Locate and open the source file for the view controller you would like to use as host and add:
 
-	        super.viewDidAppear(animated)
-    	}
+    ```swift
+    import QualarooMobileSDK
+    ```
+2. Instantiate `QualarooMobile`:
+
+    ```swift
+    var qualaroo: QualarooMobile? {
+        do {
+            return try QualarooMobile(APIKey: "YOUR-API-KEY-HERE")
+        } catch {
+            print("Error instantiating QualarooMobile: \(error)")
+            return nil
+        }
+    }
+    ```
+
+3. Attach the `QualarooMobile` instance to your view controller:
+
+    ```swift
+    override func viewDidAppear(animated: Bool) {
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            qualaroo?.attachToViewController(self, atPosition: .BottomRight)
+        } else {
+            qualaroo?.attachToViewController(self, atPosition: .Bottom)
+        }
+
+        super.viewDidAppear(animated)
+    }
     ```
  4. Manually trigger a survey:
-     - ```
-    	 qualaroo?.showSurvey(YOUR_SURVEY_ID)
-     ```
-     
+
+    ```swift
+    qualaroo?.showSurvey(YOUR_SURVEY_ID)
+    ```
+
      **Important:** If you want to force a survey to display overriding the targeting options used upon creation, you may instead use:
-     
-     - ```
-	     qualaroo?.showSurvey(YOUR_SURVEY_ID, force: true)
-     ```
+
+    ```swift
+    qualaroo?.showSurvey(YOUR_SURVEY_ID, force: true)
+    ```
+
   5. Removing `QualarooMobile` attachment from the hosting view controller:
-     - ```
-        override func viewDidDisappear(animated: Bool) {
-        	qualaroo?.removeFromViewController()
-        	
-    	    super.viewDidDisappear(animated)
-        }
-       ```
-     
+
+    ```swift
+    override func viewDidDisappear(animated: Bool) {
+        qualaroo?.removeFromViewController()
+
+        super.viewDidDisappear(animated)
+    }
+    ```
+
 #### Using Objective-C
 
 PENDING
 
 ## Further SDK Documentation
 
-Please refer to the documentation available [here](https://somelink).
+Please refer to the documentation available [here](http://qualaroo.github.io/iOSMobileSDK/).
 
 ## License
 
