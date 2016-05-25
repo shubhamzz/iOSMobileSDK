@@ -56,7 +56,7 @@
         <section>
           <section class="section">
             
-            <a href='#qualaroomobilesdk' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='qualaroomobilesdk'>QualarooMobileSDK</h1>
+            <a href='#qualaroomobilesdk_for_ios' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='qualaroomobilesdk_for_ios'>QualarooMobileSDK for iOS</h1>
 <a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>Requirements</h2>
 
 <p>In order to integrate the <code>QualarooMobileSDK</code> into a 3rd-party app, the app must satisfy the following requirements:</p>
@@ -73,7 +73,7 @@
 <a href='#using_carthage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='using_carthage'>Using Carthage</h3>
 
 <ol>
-<li>Add <code>github &quot;qualaroo/QualarooMobileSDK&quot; ~&gt; 1.0</code> to your <code>Carthage</code> file.</li>
+<li>Add <code>github &quot;qualaroo/iOSMobileSDK&quot; ~&gt; 1.0</code> to your <code>Carthage</code> file.</li>
 <li>Run <code>carthage update</code></li>
 <li>Open your Xcode project and add <code>QualarooMobileSDK.framework</code> as an embedded framework on your app&rsquo;s target.</li>
 </ol>
@@ -84,11 +84,11 @@
 <p>You probably already know what you are doing if you are following this method, but if you need a guideline, here&rsquo;s a possible procedure:</p>
 
 <ol>
-<li>Run <code>git submodule add github.com:qualaroo/QualarooMobileSDK.git</code></li>
+<li>Run <code>git submodule add github.com:qualaroo/iOSMobileSDK.git vendor/iOSMobileSDK</code></li>
 <li><p><em>(optionally)</em> Checkout a specific tag:</p>
-<pre class="highlight shell"><code><span class="nb">cd </span>path/to/your/submodule
+<pre class="highlight shell"><code><span class="nb">cd </span>vendor/iOSMobileSDK
 git checkout 1.0
-<span class="nb">cd</span> .. <span class="c"># back to your SRCROOT</span>
+<span class="nb">cd</span> ../.. <span class="c"># back to your SRCROOT</span>
 git commit -m <span class="s2">"Using QualarooMobileSDK 1.0"</span>
 </code></pre></li>
 <li><p>Open your Xcode project and add <code>QualarooMobileSDK.framework</code> as an embedded framework on your app&rsquo;s target.</p></li>
