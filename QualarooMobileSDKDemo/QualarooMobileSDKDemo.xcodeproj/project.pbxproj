@@ -22,6 +22,8 @@
 		4567FEA91CF5E33000AFD82E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4567FEA71CF5E33000AFD82E /* LaunchScreen.storyboard */; };
 		4567FEAE1CF5E3B600AFD82E /* QualarooMobileSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459108491CF5D250000ED0BC /* QualarooMobileSDK.framework */; };
 		4567FEAF1CF5E3B600AFD82E /* QualarooMobileSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 459108491CF5D250000ED0BC /* QualarooMobileSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4567FEB21CF5E4FD00AFD82E /* QualarooMobileSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459108491CF5D250000ED0BC /* QualarooMobileSDK.framework */; };
+		4567FEB31CF5E4FD00AFD82E /* QualarooMobileSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 459108491CF5D250000ED0BC /* QualarooMobileSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4570E5551CF5D41E00992F1E /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4570E5541CF5D41E00992F1E /* TableViewController.swift */; };
 		4570E5571CF5D4B700992F1E /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4570E5561CF5D4B700992F1E /* Array+Safe.swift */; };
 		459108331CF5D153000ED0BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459108321CF5D153000ED0BC /* AppDelegate.swift */; };
@@ -29,8 +31,6 @@
 		459108381CF5D153000ED0BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 459108361CF5D153000ED0BC /* Main.storyboard */; };
 		4591083A1CF5D153000ED0BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 459108391CF5D153000ED0BC /* Assets.xcassets */; };
 		4591083D1CF5D153000ED0BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4591083B1CF5D153000ED0BC /* LaunchScreen.storyboard */; };
-		4591084C1CF5D25D000ED0BC /* QualarooMobileSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459108491CF5D250000ED0BC /* QualarooMobileSDK.framework */; };
-		4591084D1CF5D25D000ED0BC /* QualarooMobileSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 459108491CF5D250000ED0BC /* QualarooMobileSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -56,13 +56,13 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		459108481CF5D1F1000ED0BC /* Embed Frameworks */ = {
+		4567FEB41CF5E4FD00AFD82E /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4591084D1CF5D25D000ED0BC /* QualarooMobileSDK.framework in Embed Frameworks */,
+				4567FEB31CF5E4FD00AFD82E /* QualarooMobileSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,7 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4591084C1CF5D25D000ED0BC /* QualarooMobileSDK.framework in Frameworks */,
+				4567FEB21CF5E4FD00AFD82E /* QualarooMobileSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,14 +154,22 @@
 		4567FE9D1CF5E33000AFD82E /* QualarooMobileSDKBasicDemoSwift */ = {
 			isa = PBXGroup;
 			children = (
+				4567FEAA1CF5E33000AFD82E /* Info.plist */,
 				4567FE9E1CF5E33000AFD82E /* AppDelegate.swift */,
 				4567FEA01CF5E33000AFD82E /* ViewController.swift */,
-				4567FEA21CF5E33000AFD82E /* Main.storyboard */,
 				4567FEA51CF5E33000AFD82E /* Assets.xcassets */,
 				4567FEA71CF5E33000AFD82E /* LaunchScreen.storyboard */,
-				4567FEAA1CF5E33000AFD82E /* Info.plist */,
+				4567FEA21CF5E33000AFD82E /* Main.storyboard */,
 			);
 			path = QualarooMobileSDKBasicDemoSwift;
+			sourceTree = "<group>";
+		};
+		4567FEB11CF5E48800AFD82E /* Embedded Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				459108491CF5D250000ED0BC /* QualarooMobileSDK.framework */,
+			);
+			name = "Embedded Frameworks";
 			sourceTree = "<group>";
 		};
 		4570E5581CF5D4B900992F1E /* Extensions */ = {
@@ -175,11 +183,11 @@
 		459108091CF5D13F000ED0BC = {
 			isa = PBXGroup;
 			children = (
-				459108491CF5D250000ED0BC /* QualarooMobileSDK.framework */,
-				459108311CF5D153000ED0BC /* QualarooMobileSDKDemo */,
+				4567FEB11CF5E48800AFD82E /* Embedded Frameworks */,
+				459108131CF5D13F000ED0BC /* Products */,
 				4567FE7F1CF5E17000AFD82E /* QualarooMobileSDKBasicDemo */,
 				4567FE9D1CF5E33000AFD82E /* QualarooMobileSDKBasicDemoSwift */,
-				459108131CF5D13F000ED0BC /* Products */,
+				459108311CF5D153000ED0BC /* QualarooMobileSDKDemo */,
 			);
 			sourceTree = "<group>";
 		};
@@ -254,7 +262,7 @@
 				4591082C1CF5D153000ED0BC /* Sources */,
 				4591082D1CF5D153000ED0BC /* Frameworks */,
 				4591082E1CF5D153000ED0BC /* Resources */,
-				459108481CF5D1F1000ED0BC /* Embed Frameworks */,
+				4567FEB41CF5E4FD00AFD82E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -559,7 +567,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = QualarooMobileSDKDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qualaroo.QualarooMobileSDKDemo;
@@ -572,7 +580,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = QualarooMobileSDKDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qualaroo.QualarooMobileSDKDemo;
