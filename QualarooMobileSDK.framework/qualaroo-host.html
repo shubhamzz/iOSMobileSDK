@@ -13,7 +13,7 @@
         <script type="text/javascript">
             var _kiq = _kiq || [];
             var qualarooHost = new QualarooHost();
-            var surveyIDToTrigger;
+            var deferredTriggerSurveyFn;
             var qualarooScriptLoaded = false;
             var qualarooScriptLoading = false;
 
@@ -27,10 +27,10 @@
 
                         window.webkit.messageHandlers.qualarooScriptLoadSuccess.postMessage(url);
 
-                        if (surveyIDToTrigger) {
+                        if (deferredTriggerSurveyFn) {
                             setTimeout(function() {
-                                triggerSurvey(surveyIDToTrigger);
-                                surveyIDToTrigger = null;
+                                deferredTriggerSurveyFn();
+                                deferredTriggerSurveyFn = null;
                             }, 50);
                         }
                     };
@@ -51,7 +51,9 @@
                     _kiq.push(['showSurvey', surveyID, shouldForce]);
                 } else {
                     // Let's trigger later
-                    surveyIDToTrigger = surveyID;
+                    deferredTriggerSurveyFn = function() {
+                        triggerSurvey(surveyID, shouldForce);
+                    };
                 }
             }
 
