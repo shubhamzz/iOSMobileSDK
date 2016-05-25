@@ -1,4 +1,4 @@
-# QualarooMobileSDK
+# QualarooMobileSDK for iOS
 
 ## Requirements
 
@@ -15,7 +15,7 @@ For those that would rather avoid any dependency manager or that would like to m
 
 ### Using Carthage
 
-1. Add `github "qualaroo/QualarooMobileSDK" ~> 1.0` to your `Carthage` file.
+1. Add `github "qualaroo/iOSMobileSDK" ~> 1.0` to your `Carthage` file.
 2. Run `carthage update`
 3. Open your Xcode project and add `QualarooMobileSDK.framework` as an embedded framework on your app's target.
 
@@ -26,13 +26,13 @@ To keep our SDK up-to-date, you will typically only need to run `carthage update
 
 You probably already know what you are doing if you are following this method, but if you need a guideline, here's a possible procedure:
 
-1. Run `git submodule add github.com:qualaroo/QualarooMobileSDK.git`
+1. Run `git submodule add github.com:qualaroo/iOSMobileSDK.git vendor/iOSMobileSDK`
 2. *(optionally)* Checkout a specific tag:
 
     ```bash
-    cd path/to/your/submodule
+    cd vendor/iOSMobileSDK
     git checkout 1.0
-    cd .. # back to your SRCROOT
+    cd ../.. # back to your SRCROOT
     git commit -m "Using QualarooMobileSDK 1.0"
     ```
 
