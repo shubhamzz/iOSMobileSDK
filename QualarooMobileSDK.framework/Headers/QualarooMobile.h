@@ -57,19 +57,20 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)removeFromViewController;
 
 /**
-   Displays a survey with a given ID inside a view controller.
-
-   @param surveyID The survey ID to display.
+ 
+ @brief Displays a survey with a given Alias inside a view controller.
+ 
+ @param surveyAlias The survey Alias to display.
  */
-- (void)showSurvey:(NSUInteger)surveyID;
+- (void)showSurvey:(NSString *)surveyAlias;
 
 /**
-   Displays a survey with a given ID inside a view controller.
+   Displays a survey with a given Alias inside a view controller.
 
-   @param surveyID The survey ID to display.
+   @param surveyAlias The survey Alias to display.
    @param shouldForce Force a survey to show overriding target settings.
  */
-- (void)showSurvey:(NSUInteger)surveyID force:(BOOL)shouldForce;
+- (void)showSurvey:(NSString *)surveyAlias force:(BOOL)shouldForce;
 
 @end
 

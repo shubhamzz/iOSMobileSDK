@@ -9,7 +9,7 @@
         <!--View Controller-->
         <scene sceneID="1EC-O7-j1F">
             <objects>
-                <viewController id="cxR-se-XBG" customClass="ViewController" customModule="QualarooMobileSDKDemoSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cxR-se-XBG" customClass="ViewController" customModule="QualarooMobileSDKDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ROU-8P-9ia"/>
                         <viewControllerLayoutGuide type="bottom" id="wtz-vq-mFm"/>
@@ -43,7 +43,7 @@
         <!--Table View Controller-->
         <scene sceneID="UQI-qU-Ws1">
             <objects>
-                <tableViewController id="pet-YJ-pjr" customClass="TableViewController" customModule="QualarooMobileSDKDemoSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="pet-YJ-pjr" customClass="TableViewController" customModule="QualarooMobileSDKDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="60" sectionHeaderHeight="18" sectionFooterHeight="18" id="nme-d9-b0K">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -63,7 +63,7 @@
                                         <rect key="frame" x="0.0" y="49.5" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9OC-zj-rD4" id="jhE-YV-13m">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Build Info" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBA-pE-ccU">
@@ -127,7 +127,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Survey (ID or Alias)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLP-G3-Hkz">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Survey Alias" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLP-G3-Hkz">
                                                     <rect key="frame" x="16" y="19" width="170" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="170" id="1UC-ad-TbS"/>
