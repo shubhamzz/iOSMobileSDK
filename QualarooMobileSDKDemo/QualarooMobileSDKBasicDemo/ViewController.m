@@ -36,8 +36,8 @@
 
     [super viewDidAppear:animated];
 
-    // 2 - Set your survey ID below
-    [self.qualaroo showSurvey:0
+    // 2 - Set your survey ID or Alias below
+    [self.qualaroo showSurvey:@""
                         force:YES];
 }
 
