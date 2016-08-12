@@ -17,15 +17,15 @@ class TableViewController: UITableViewController, UIPickerViewDelegate, UITextFi
     @IBOutlet weak var showSurveyButton: UIButton!
     @IBOutlet weak var buildLabel: UILabel!
 
-    var surveyID: UInt {
+    var surveyAlias: String? {
         get {
-            return UInt(NSUserDefaults.standardUserDefaults().integerForKey("DemoSurveyID"))
+            return NSUserDefaults.standardUserDefaults().stringForKey("DemoSurvey")
         }
 
         set {
-            NSUserDefaults.standardUserDefaults().setInteger(Int(newValue), forKey: "DemoSurveyID")
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "DemoSurvey")
 
-            if qualaroo != nil && newValue != 0 {
+            if qualaroo != nil && newValue != "" {
                 showSurveyButton.enabled = true
             } else {
                 showSurveyButton.enabled = false
@@ -95,7 +95,11 @@ class TableViewController: UITableViewController, UIPickerViewDelegate, UITextFi
     override func viewWillAppear(animated: Bool) {
         showSurveyButton.enabled = false
         apiKeyTextField.text = apiKey
-        surveyIDTextField.text = String(surveyID)
+        if let surveyAlias = surveyAlias {
+            surveyIDTextField.text = surveyAlias
+        } else {
+            surveyIDTextField.text = ""
+        }
 
         buildLabel.text = "\(QMBundleInfo.name()) \(QMBundleInfo.version()) (build \(QMBundleInfo.buildNumber()))\nBuilt on \(QMBundleInfo.buildDate())"
 
@@ -191,7 +195,7 @@ class TableViewController: UITableViewController, UIPickerViewDelegate, UITextFi
     }
 
     @IBAction func updateSurveyID(sender: AnyObject) {
-        surveyID = UInt((sender as? UITextField)?.text ?? "") ?? 0
+        surveyAlias = (sender as? UITextField)?.text ?? ""
     }
 
     @IBAction func showSurvey(sender: AnyObject) {
@@ -200,7 +204,8 @@ class TableViewController: UITableViewController, UIPickerViewDelegate, UITextFi
                 self.presentErrorMessage("Qualaroo Survey is not properly configured. Please enter a valid API Key.")
             }
         } else {
-            qualaroo?.showSurvey(surveyID, force: true)
+            guard let surveyAlias = surveyAlias else { return }
+            qualaroo?.showSurvey(surveyAlias, force: true)
         }
     }
 
@@ -217,7 +222,7 @@ class TableViewController: UITableViewController, UIPickerViewDelegate, UITextFi
                 qualaroo?.attachToViewController(pvc, atPosition: attachmentPosition)
             }
 
-            if surveyID != 0 {
+            if surveyAlias != "" {
                 showSurveyButton.enabled = true
             }
 

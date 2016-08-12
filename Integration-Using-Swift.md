@@ -46,13 +46,13 @@
 4. Manually trigger a survey:
 
     ```swift
-    qualaroo?.showSurvey(YOUR_SURVEY_ID)
+    qualaroo?.showSurvey(YOUR_SURVEY_ALIAS)
     ```
 
     Or, overriding any targeting options used upon creation:
 
     ```swift
-    qualaroo?.showSurvey(YOUR_SURVEY_ID, force: true)
+    qualaroo?.showSurvey(YOUR_SURVEY_ALIAS, force: true)
     ```
 
 5. Removing `QualarooMobile` attachment from the hosting view controller:

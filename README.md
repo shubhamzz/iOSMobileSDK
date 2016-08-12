@@ -47,7 +47,7 @@ The typical integration procedure is as follows:
 1. Import `QualarooMobileSDK` into your code (e.g., a view controller)
 2. Instantiate `QualarooMobile` by passing a valid API key and check for any errors (instantiation may fail due to an invalid/bogus API key)
 3. Attach the `QualarooMobile` instance to your view controller and, optionally, specify an attachment position (bottom or top on iPhone, or a corner on iPad)
-4. Show a survey with a given ID.
+4. Show a survey with a given Alias.
 5. Cleanup: Remove `QualarooMobile` from the hosting view controller.
 
 	_**Note**: It is very important to remember removing the `QualarooMobile` attachment from the hosting view controller whenever it is no longer necessary and before the view controller is destroyed, otherwise we will incur into a retain cycle._

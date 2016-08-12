@@ -32,8 +32,8 @@ class ViewController: UIViewController {
 
         super.viewDidAppear(animated)
 
-        // 2 - Set your survey ID below
-        qualaroo?.showSurvey(0, force: true)
+        // 2 - Set your survey ID or Alias below
+        qualaroo?.showSurvey("", force: true)
     }
 
     override func viewDidDisappear(animated: Bool) {

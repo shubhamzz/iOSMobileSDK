@@ -45,16 +45,17 @@
                 }
             }
 
-            function triggerSurvey(surveyID, shouldForce) {
-                if (qualarooScriptLoaded) {
-                    _kiq.push(['stopSurvey']);
-                    _kiq.push(['showSurvey', surveyID, shouldForce]);
-                } else {
-                    // Let's trigger later
-                    deferredTriggerSurveyFn = function() {
-                        triggerSurvey(surveyID, shouldForce);
-                    };
-                }
+            function triggerSurvey(surveyAlias, shouldForce) {
+              var surveyID = String(KI._info.surveyAliases[surveyAlias]);
+              if (qualarooScriptLoaded) {
+                _kiq.push(['stopSurvey']);
+                _kiq.push(['showSurvey', surveyID, shouldForce]);
+              } else {
+                // Let's trigger later
+                deferredTriggerSurveyFn = function() {
+                  triggerSurvey(surveyID, shouldForce);
+                };
+              }
             }
 
             window.addEventListener("error", function(e) {
