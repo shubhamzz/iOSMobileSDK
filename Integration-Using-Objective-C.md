@@ -48,13 +48,13 @@
 4. Manually trigger a survey:
 
     ```objective-c
-    [self.qualaroo showSurvey:YOUR_SURVEY_ID];
+    [self.qualaroo showSurvey:YOUR_SURVEY_ALIAS];
     ```
 
     Or, overriding any targeting options used upon creation:
 
     ```objective-c
-    [self.qualaroo showSurvey:YOUR_SURVEY_ID force:YES];
+    [self.qualaroo showSurvey:YOUR_SURVEY_ALIAS force:YES];
     ```
 
 5. Removing `QualarooMobile` attachment from the hosting view controller:
@@ -62,7 +62,7 @@
     ```objective-c
 	 - (void)viewDidDisappear:(BOOL)animated {
 	     [super viewDidDisappear:animated];
-	
+
 	     [self.qualaroo removeFromViewController];
 	 }
     ```
