@@ -43,7 +43,7 @@ div#qual_ol .qual_ol_qtitle,
 div#qual_ol .qual_ol_qdescr,
 div#qual_ol .qual_ol_date_box,
 div#qual_ol .qual_ol_qlabel {
-    font-size: 0.88em;
+    font-size: 1.2em;
 }
 
 div#qual_ol .qual_ol_btn,
@@ -98,7 +98,7 @@ div#qual_scrnr .qual_scrnr_txt_w_img .qual_scrnr_txt_link {
     margin-top: 25px;
     border: none;
     border-radius: 0;
-    padding: 0.8em 0.5em 1em 0.5em;
+    padding: 1em 0.5em 0.8em 0.5em;
     height: auto;
     line-height: 1em;
 }
@@ -138,7 +138,7 @@ div#qual_ol_send.qual_ol_btn.qual_ol_send {
     max-width: inherit;
     border-radius: 0;
     margin-top: 12px;
-    padding: 0.8em 0.5em 1em 0.5em;
+    padding: 1em 0.5em 0.8em 0.5em;
     height: auto;
     line-height: 1em;
 }
@@ -183,7 +183,7 @@ div#qual_mask.qual_mask {
 div#qual_scrnr.qual_scrnr {
     left: 0;
     right: 0;
-    height: 9.5em;
+    height: 10.5em;
     bottom: 0;
 }
 
@@ -236,7 +236,7 @@ div#qual_ol .qual_ol_ans_item {
     font-weight: bold;
     margin: 0;
     min-height: inherit;
-    padding: 0.8em 1.182em 1em 1.182em;
+    padding: 1em 1.182em 0.8em 1.182em;
     line-height: 1em;
     border: none;
     border-radius: 0;
@@ -330,4 +330,11 @@ div#qual_ol .qual_ol_nps_ul li:last-child {
     border-bottom-right-radius: 0.182em;
     border-bottom-left-radius: 0;
     border-right-width: 0.091em;
+}
+
+div#qual_ol .qual_ol_more_above, div#qual_ol .qual_ol_more_below {
+    display: none;
+}
+div#qual_scrnr .qual_scrnr_txt_w_img .qual_scrnr_txt_title {
+    font-size: 1.75em;
 }
