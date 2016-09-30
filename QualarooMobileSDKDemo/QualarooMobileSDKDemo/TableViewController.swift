@@ -19,32 +19,32 @@ class TableViewController: UITableViewController, UIPickerViewDelegate, UITextFi
 
     var surveyAlias: String? {
         get {
-            return NSUserDefaults.standardUserDefaults().stringForKey("DemoSurvey")
+            return UserDefaults.standard.string(forKey: "DemoSurvey")
         }
 
         set {
-            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "DemoSurvey")
+            UserDefaults.standard.set(newValue, forKey: "DemoSurvey")
 
             if qualaroo != nil && newValue != "" {
-                showSurveyButton.enabled = true
+                showSurveyButton.isEnabled = true
             } else {
-                showSurveyButton.enabled = false
+                showSurveyButton.isEnabled = false
             }
         }
     }
 
     var apiKey: String? {
         get {
-            return NSUserDefaults.standardUserDefaults().stringForKey("DemoAPIKey")
+            return UserDefaults.standard.string(forKey: "DemoAPIKey")
         }
 
         set {
-            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "DemoAPIKey")
+            UserDefaults.standard.set(newValue, forKey: "DemoAPIKey")
 
-            showSurveyButton.enabled = false
+            showSurveyButton.isEnabled = false
 
             if let newValue = newValue {
-                instantiateQualarooMobileWithAPIKey(newValue)
+                _ = instantiateQualarooMobileWithAPIKey(newValue)
             }
         }
     }
@@ -53,16 +53,16 @@ class TableViewController: UITableViewController, UIPickerViewDelegate, UITextFi
         get {
             var position: QualarooSurveyPosition?
 
-            if let obj = NSUserDefaults.standardUserDefaults().objectForKey("DemoAttachmentPosition") {
-                position = QualarooSurveyPosition(rawValue: obj.unsignedIntegerValue)
+            if let obj = UserDefaults.standard.object(forKey: "DemoAttachmentPosition") {
+                position = QualarooSurveyPosition(rawValue: (obj as AnyObject).uintValue)
             }
 
             if position == nil {
                 // Set default attachment position based on platform
-                if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-                    position = .BottomRight
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    position = .bottomRight
                 } else {
-                    position = .Bottom
+                    position = .bottom
                 }
 
                 self.attachmentPosition = position!
@@ -72,28 +72,28 @@ class TableViewController: UITableViewController, UIPickerViewDelegate, UITextFi
         }
 
         set {
-            NSUserDefaults.standardUserDefaults().setInteger(Int(newValue.rawValue), forKey: "DemoAttachmentPosition")
+            UserDefaults.standard.set(Int(newValue.rawValue), forKey: "DemoAttachmentPosition")
 
-            showSurveyButton.enabled = false
+            showSurveyButton.isEnabled = false
 
             if let apiKey = apiKey {
-                instantiateQualarooMobileWithAPIKey(apiKey)
+                _ = instantiateQualarooMobileWithAPIKey(apiKey)
             }
         }
     }
 
     var availableAttachmentPositions: [QualarooSurveyPosition] {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            return [.BottomLeft, .BottomRight, .TopLeft, .TopRight]
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return [.bottomLeft, .bottomRight, .topLeft, .topRight]
         } else {
-            return [.Bottom, .Top]
+            return [.bottom, .top]
         }
     }
     
     var qualaroo: QualarooMobile?
 
-    override func viewWillAppear(animated: Bool) {
-        showSurveyButton.enabled = false
+    override func viewWillAppear(_ animated: Bool) {
+        showSurveyButton.isEnabled = false
         apiKeyTextField.text = apiKey
         if let surveyAlias = surveyAlias {
             surveyIDTextField.text = surveyAlias
@@ -101,26 +101,32 @@ class TableViewController: UITableViewController, UIPickerViewDelegate, UITextFi
             surveyIDTextField.text = ""
         }
 
-        buildLabel.text = "\(QMBundleInfo.name()) \(QMBundleInfo.version()) (build \(QMBundleInfo.buildNumber()))\nBuilt on \(QMBundleInfo.buildDate())"
+        guard let bundleInfoName = QMBundleInfo.name(),
+              let bundleInfoVersion = QMBundleInfo.version(),
+              let buildInfoNumber = QMBundleInfo.buildNumber(),
+              let buildInfoDate = QMBundleInfo.buildDate()
+        else { return }
+        
+        buildLabel.text = "\(bundleInfoName) \(bundleInfoVersion) (build \(buildInfoNumber))\nBuilt on \(buildInfoDate)"
 
-        buildLabel.font = UIFont.systemFontOfSize(UIFont.smallSystemFontSize())
-        buildLabel.textAlignment = .Center
-        buildLabel.textColor = .blackColor()
-        buildLabel.lineBreakMode = .ByWordWrapping
+        buildLabel.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+        buildLabel.textAlignment = .center
+        buildLabel.textColor = .black
+        buildLabel.lineBreakMode = .byWordWrapping
         buildLabel.numberOfLines = 0
 
-        if let idx = availableAttachmentPositions.indexOf(attachmentPosition) {
+        if let idx = availableAttachmentPositions.index(of: attachmentPosition) {
             attachmentPositionPickerView.selectRow(idx, inComponent: 0, animated: true)
         }
 
         if let apiKey = apiKey {
-            instantiateQualarooMobileWithAPIKey(apiKey)
+            _ = instantiateQualarooMobileWithAPIKey(apiKey)
         }
 
         super.viewWillAppear(animated)
     }
 
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
         qualaroo?.removeFromViewController()
@@ -128,7 +134,7 @@ class TableViewController: UITableViewController, UIPickerViewDelegate, UITextFi
 
     // MARK: UITextFieldDelegate
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
 
         return false
@@ -136,30 +142,30 @@ class TableViewController: UITableViewController, UIPickerViewDelegate, UITextFi
 
     // MARK: UIPickerViewDataSource
 
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponentsInPickerView(_ pickerView: UIPickerView) -> Int {
         return 1
     }
 
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return availableAttachmentPositions.count
     }
 
     // MARK: UIPickerViewDelegate
 
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if let position = availableAttachmentPositions[safe: UInt(row)] {
             switch position {
-            case .Top:
+            case .top:
                 return "Top"
-            case .Bottom:
+            case .bottom:
                 return "Bottom"
-            case .TopLeft:
+            case .topLeft:
                 return "Top Left"
-            case .TopRight:
+            case .topRight:
                 return "Top Right"
-            case .BottomLeft:
+            case .bottomLeft:
                 return "Bottom Left"
-            case .BottomRight:
+            case .bottomRight:
                 return "Bottom Right"
             }
         } else {
@@ -167,20 +173,20 @@ class TableViewController: UITableViewController, UIPickerViewDelegate, UITextFi
         }
     }
 
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if let position = availableAttachmentPositions[safe: UInt(row)] {
             attachmentPosition = position
         }
     }
 
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         var label: UILabel! = view as? UILabel
 
         if label == nil {
             label = UILabel()
 
-            label.font = UIFont.systemFontOfSize(UIFont.systemFontSize())
-            label.textAlignment = .Center
+            label.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
+            label.textAlignment = .center
         }
 
         label.text = self.pickerView(pickerView, titleForRow: row, forComponent: component)
@@ -190,17 +196,17 @@ class TableViewController: UITableViewController, UIPickerViewDelegate, UITextFi
 
     // MARK: Actions
 
-    @IBAction func updateAPIKey(sender: AnyObject) {
+    @IBAction func updateAPIKey(_ sender: AnyObject) {
         apiKey = (sender as? UITextField)?.text
     }
 
-    @IBAction func updateSurveyID(sender: AnyObject) {
+    @IBAction func updateSurveyID(_ sender: AnyObject) {
         surveyAlias = (sender as? UITextField)?.text ?? ""
     }
 
-    @IBAction func showSurvey(sender: AnyObject) {
+    @IBAction func showSurvey(_ sender: AnyObject) {
         if qualaroo == nil {
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 self.presentErrorMessage("Qualaroo Survey is not properly configured. Please enter a valid API Key.")
             }
         } else {
@@ -211,24 +217,24 @@ class TableViewController: UITableViewController, UIPickerViewDelegate, UITextFi
 
     // MARK: Private
 
-    private func instantiateQualarooMobileWithAPIKey(APIKey: String) -> Bool {
+    fileprivate func instantiateQualarooMobileWithAPIKey(_ APIKey: String) -> Bool {
         qualaroo?.removeFromViewController()
         qualaroo = nil
 
         do {
-            qualaroo = try QualarooMobile(APIKey: APIKey)
+            qualaroo = try QualarooMobile(apiKey: APIKey)
 
-            if let pvc = self.parentViewController {
-                qualaroo?.attachToViewController(pvc, atPosition: attachmentPosition)
+            if let pvc = self.parent {
+                qualaroo?.attach(to: pvc, at: attachmentPosition)
             }
 
             if surveyAlias != "" {
-                showSurveyButton.enabled = true
+                showSurveyButton.isEnabled = true
             }
 
             return true
         } catch {
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 self.presentErrorMessage("\((error as NSError).localizedDescription)")
             }
 
@@ -236,17 +242,17 @@ class TableViewController: UITableViewController, UIPickerViewDelegate, UITextFi
         }
     }
 
-    private func presentErrorMessage(message: String) {
+    fileprivate func presentErrorMessage(_ message: String) {
         let alertController = UIAlertController(title: "QualarooMobileSDK",
                                                 message: message,
-                                                preferredStyle: .Alert)
+                                                preferredStyle: .alert)
 
-        let okAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-            alertController.dismissViewControllerAnimated(true, completion: nil)
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            alertController.dismiss(animated: true, completion: nil)
         }
 
         alertController.addAction(okAction)
 
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 }
