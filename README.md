@@ -15,7 +15,7 @@ For those that would rather avoid any dependency manager or that would like to m
 
 ### Using Carthage
 
-1. Add `github "qualaroo/iOSMobileSDK" ~> 1.0` to your `Carthage` file.
+1. Add `github "qualaroo/iOSMobileSDK" ~> 1.1.0` to your `Carthage` file.
 2. Run `carthage update`
 3. Open your Xcode project and add `QualarooMobileSDK.framework` as an embedded framework on your app's target.
 
