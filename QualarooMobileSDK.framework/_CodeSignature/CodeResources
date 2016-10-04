@@ -22,7 +22,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		l5BJhK8doAJTh5B1dC+DMo64/5k=
+		MTKk+SDWwj2G5TzB3d3SwcfYwz0=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>qualaroo-custom.css</key>
 		<data>
-		AHYcg43P0yEF6UGqkCgjd1mCT9c=
+		Pa0+GdLALJh102kwO2iC4y3KLRQ=
 		</data>
 		<key>qualaroo-darkui-custom.css</key>
 		<data>
@@ -110,11 +110,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			AHYcg43P0yEF6UGqkCgjd1mCT9c=
+			Pa0+GdLALJh102kwO2iC4y3KLRQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			lo04eiEQfYikfrVa1wtz0eA/DyESs4uuLDqRQl+CrVo=
+			3l9Wzn4j/xWA8VFGlSifEo44c+NEr5eTQRSOEFglGe8=
 			</data>
 		</dict>
 		<key>qualaroo-darkui-custom.css</key>
@@ -180,6 +180,11 @@
 			<key>weight</key>
 			<real>1100</real>
 		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
+		</dict>
 		<key>^version.plist$</key>
 		<true/>
 	</dict>
@@ -224,6 +229,11 @@
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
+		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
 		</dict>
 		<key>^Info\.plist$</key>
 		<dict>
