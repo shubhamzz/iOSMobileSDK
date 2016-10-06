@@ -211,6 +211,7 @@ class TableViewController: UITableViewController, UIPickerViewDelegate, UITextFi
             }
         } else {
             guard let surveyAlias = surveyAlias else { return }
+            qualaroo?.setIdentityCodeWith("DemoString")
             qualaroo?.showSurvey(surveyAlias, force: true)
         }
     }
