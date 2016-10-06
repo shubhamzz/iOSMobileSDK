@@ -72,6 +72,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)showSurvey:(NSString *)surveyAlias force:(BOOL)shouldForce;
 
+/**
+ Set custom Qualaroo Identity Code based on the string
+
+ @param string Custom Identity Code
+ */
+- (void)setIdentityCodeWithString:(NSString *) string;
 @end
 
 NS_ASSUME_NONNULL_END
