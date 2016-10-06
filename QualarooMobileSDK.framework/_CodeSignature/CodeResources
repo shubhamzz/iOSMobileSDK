@@ -14,7 +14,7 @@
 		</data>
 		<key>Headers/QualarooMobile.h</key>
 		<data>
-		81P2Pfb/Vm40uwmHERwNCRJbfso=
+		mnUNNv25r0gFQLsUj5v+sx8eLiY=
 		</data>
 		<key>Headers/QualarooMobileSDK.h</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		MTKk+SDWwj2G5TzB3d3SwcfYwz0=
+		GYCId5YoXvOT4ZrHui+EbT0rmsI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>qualaroo-custom.css</key>
 		<data>
-		Pa0+GdLALJh102kwO2iC4y3KLRQ=
+		AHYcg43P0yEF6UGqkCgjd1mCT9c=
 		</data>
 		<key>qualaroo-darkui-custom.css</key>
 		<data>
@@ -38,7 +38,7 @@
 		</data>
 		<key>qualaroo-host.html</key>
 		<data>
-		2SPgwZRXR0loCzwez07CHddfmxQ=
+		EqI2FcHRTIgF/GdSVcAF6KbC/w0=
 		</data>
 		<key>qualaroo-host.js</key>
 		<data>
@@ -77,11 +77,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			81P2Pfb/Vm40uwmHERwNCRJbfso=
+			mnUNNv25r0gFQLsUj5v+sx8eLiY=
 			</data>
 			<key>hash2</key>
 			<data>
-			yFLMxTEXwCRDT8fISvzl89QQIXgElpAE4tGGF5wwPsk=
+			NJTIHm2FaCppyUyABqoJkG9Ha3OfjTcjRa0tp5iAVVI=
 			</data>
 		</dict>
 		<key>Headers/QualarooMobileSDK.h</key>
@@ -110,11 +110,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Pa0+GdLALJh102kwO2iC4y3KLRQ=
+			AHYcg43P0yEF6UGqkCgjd1mCT9c=
 			</data>
 			<key>hash2</key>
 			<data>
-			3l9Wzn4j/xWA8VFGlSifEo44c+NEr5eTQRSOEFglGe8=
+			lo04eiEQfYikfrVa1wtz0eA/DyESs4uuLDqRQl+CrVo=
 			</data>
 		</dict>
 		<key>qualaroo-darkui-custom.css</key>
@@ -132,11 +132,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			2SPgwZRXR0loCzwez07CHddfmxQ=
+			EqI2FcHRTIgF/GdSVcAF6KbC/w0=
 			</data>
 			<key>hash2</key>
 			<data>
-			3Q0HALWtZzVdhoO30A1l8QpC4LPLT4s/75jS2AE5kJQ=
+			Pxm3Sj1oxyNOiln7DxcScmxjTD9h6aZR+76z0dZVvk0=
 			</data>
 		</dict>
 		<key>qualaroo-host.js</key>
@@ -179,11 +179,6 @@
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
-		</dict>
-		<key>^Base\.lproj/</key>
-		<dict>
-			<key>weight</key>
-			<real>1010</real>
 		</dict>
 		<key>^version.plist$</key>
 		<true/>
@@ -229,11 +224,6 @@
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
-		</dict>
-		<key>^Base\.lproj/</key>
-		<dict>
-			<key>weight</key>
-			<real>1010</real>
 		</dict>
 		<key>^Info\.plist$</key>
 		<dict>
