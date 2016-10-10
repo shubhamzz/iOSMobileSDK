@@ -7,6 +7,7 @@
 //
 
 var QualarooHost = function() {};
+var isVertical = false;
 
 QualarooHost.prototype = {
 
@@ -165,6 +166,56 @@ QualarooHost.prototype = {
             });
         }
     },
+    addOnClickItems: function () {
+      var itemsList = document.getElementsByClassName("qual_ol_ans_item");
+      var items = Array.prototype.slice.call(itemsList);
+
+      if (items.length != 0) {
+        for (item of items) {
+            if (item.onclick) return;
+            item.onclick = function(event) {
+                setTimeout(function() {
+                    event.target.scrollIntoView();
+                }, 0);
+            }
+        }
+      }
+    },
+    demoScroll: function () {
+      var box = document.getElementById("qual_ol_box");
+      if (box) {
+        setTimeout(function() {
+            function scrollDown(element, to, duration) {
+
+              var difference = to - element.scrollTop;
+              var perTick = difference / duration * 10;
+
+              if (difference - perTick <= box.offsetHeight) return;
+              setTimeout(function() {
+                element.scrollTop = element.scrollTop + perTick;
+                if (element.scrollTop == 0) return;
+                scrollDown(element, to, duration - 10);
+              }, 10);
+            }
+            scrollDown(box, suggestedNewHeight, 2000);
+            setTimeout(function() {
+                function scrollTo(element, to, duration) {
+
+                    var difference = to - element.scrollTop;
+                    var perTick = difference / duration * 10;
+
+                    if (duration <= 0) return;
+                    setTimeout(function() {
+                        element.scrollTop = element.scrollTop + perTick;
+                        if (element.scrollTop == to) return;
+                        scrollTo(element, to, duration - 10);
+                    }, 10);
+                }
+            scrollTo(box, 0, 1000);
+            }, 2010);
+        }, 800);
+      }
+    },
 
     calculateCurrentHeight: function() {
         var ol = document.getElementById("qual_ol");
@@ -195,12 +246,11 @@ QualarooHost.prototype = {
             for (item of ansItems) {
                // As soon as we find an item that does not fit inside its intended space,
                // we change the answers arrangement to vertical.
+               if (isVertical) break;
                if (item.scrollWidth > item.offsetWidth) {
                     // arrange items vertically
                     ansBox.classList.add("vertical-arrangement");
-
-                    this.forceScrollHintsRefresh();
-
+                    isVertical = true;
                     // break the loop early
                     break;
                 } else {
@@ -225,18 +275,6 @@ QualarooHost.prototype = {
             logo.style.display = "none";
         } else {
             logo.style.display = "block";
-        }
-    },
-
-    forceScrollHintsRefresh: function() {
-        // naive way to force scroll hints to appear
-        var box = document.getElementById("qual_ol_box");
-
-        if (box) {
-            box.scrollTop = 1;
-            setTimeout(function() {
-                box.scrollTop = 0;
-            }, 25);
         }
     },
 
@@ -274,6 +312,7 @@ QualarooHost.prototype = {
     },
 
     notifySurveyClosed: function() {
+        isVertical = false;
         window.webkit.messageHandlers.surveyClosed.postMessage('');
     },
 
