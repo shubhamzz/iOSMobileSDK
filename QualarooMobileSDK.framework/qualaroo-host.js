@@ -8,6 +8,7 @@
 
 var QualarooHost = function() {};
 var isVertical = false;
+var isScrolled = false;
 
 QualarooHost.prototype = {
 
@@ -174,16 +175,14 @@ QualarooHost.prototype = {
         for (item of items) {
             if (item.onclick) return;
             item.onclick = function(event) {
-                setTimeout(function() {
-                    event.target.scrollIntoView();
-                }, 0);
+                event.target.scrollIntoView();
             }
         }
       }
     },
     demoScroll: function () {
       var box = document.getElementById("qual_ol_box");
-      if (box && isVertical) {
+      if (box && isVertical && !isScrolled) {
         window.webkit.messageHandlers.startDemoScroll.postMessage('');
         setTimeout(function() {
             function scrollDown(element, to, duration) {
@@ -317,6 +316,7 @@ QualarooHost.prototype = {
 
     notifySurveyClosed: function() {
         isVertical = false;
+        isScrolled = false;
         window.webkit.messageHandlers.surveyClosed.postMessage('');
     },
 
