@@ -11,7 +11,7 @@
     ```swift
     lazy var qualaroo: QualarooMobile? = {
         do {
-            return try QualarooMobile(APIKey: "YOUR-API-KEY-HERE")
+            return try QualarooMobile(apiKey: "YOUR-API-KEY-HERE")
         } catch {
             print("Error instantiating QualarooMobile: \(error)")
             return nil
@@ -23,7 +23,7 @@
 
     ```swift
     override func viewDidAppear(animated: Bool) {
-        qualaroo?.attachToViewController(self)
+        qualaroo?.attach(to: self)
 
         super.viewDidAppear(animated)
     }
@@ -34,7 +34,7 @@
     ```swift
     override func viewDidAppear(animated: Bool) {
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            qualaroo?.attachToViewController(self, atPosition: .BottomRight)
+            qualaroo?.attach(to: self, at: .BottomRight)
         } else {
             qualaroo?.attachToViewController(self, atPosition: .Bottom)
         }
@@ -43,19 +43,27 @@
     }
     ```
 
-4. Manually trigger a survey:
+4. (Optional) You can set Identity Code by using any string.
+
+    Identity Code default set as the device's UUID.
 
     ```swift
-    qualaroo?.showSurvey(YOUR_SURVEY_ALIAS)
+    qualaroo?.setIdentityCodeWith(_ YOUR_IDENTITY_STRING)
+    ```
+
+5. Manually trigger a survey:
+
+    ```swift
+    qualaroo?.showSurvey(_ YOUR_SURVEY_ALIAS)
     ```
 
     Or, overriding any targeting options used upon creation:
 
     ```swift
-    qualaroo?.showSurvey(YOUR_SURVEY_ALIAS, force: true)
+    qualaroo?.showSurvey(_ YOUR_SURVEY_ALIAS, force: true)
     ```
 
-5. Removing `QualarooMobile` attachment from the hosting view controller:
+6. Removing `QualarooMobile` attachment from the hosting view controller:
 
     ```swift
     override func viewDidDisappear(animated: Bool) {

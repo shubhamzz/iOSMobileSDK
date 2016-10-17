@@ -45,7 +45,15 @@
 	 }
     ```
 
-4. Manually trigger a survey:
+4. (Optional) You can set Identity Code by using any string.
+
+    Identity Code default set as the device's UUID.
+
+    ```objective-c
+    [self.qualaroo setIdentityCodeWith:YOUR_IDENTITY_STRING];
+    ```
+
+5. Manually trigger a survey:
 
     ```objective-c
     [self.qualaroo showSurvey:YOUR_SURVEY_ALIAS];
@@ -57,7 +65,7 @@
     [self.qualaroo showSurvey:YOUR_SURVEY_ALIAS force:YES];
     ```
 
-5. Removing `QualarooMobile` attachment from the hosting view controller:
+6. Removing `QualarooMobile` attachment from the hosting view controller:
 
     ```objective-c
 	 - (void)viewDidDisappear:(BOOL)animated {
