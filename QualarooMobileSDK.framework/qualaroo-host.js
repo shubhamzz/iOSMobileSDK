@@ -183,7 +183,8 @@ QualarooHost.prototype = {
     },
     demoScroll: function () {
       var box = document.getElementById("qual_ol_box");
-      if (box) {
+      if (box && isVertical) {
+        window.webkit.messageHandlers.startDemoScroll.postMessage('');
         setTimeout(function() {
             function scrollDown(element, to, duration) {
 
@@ -207,7 +208,10 @@ QualarooHost.prototype = {
                     if (duration <= 0) return;
                     setTimeout(function() {
                         element.scrollTop = element.scrollTop + perTick;
-                        if (element.scrollTop == to) return;
+                        if (element.scrollTop == to) {
+                            window.webkit.messageHandlers.stopDemoScroll.postMessage('');
+                            return;
+                        }
                         scrollTo(element, to, duration - 10);
                     }, 10);
                 }
