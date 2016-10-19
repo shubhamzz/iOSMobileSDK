@@ -209,6 +209,7 @@ QualarooHost.prototype = {
                         element.scrollTop = element.scrollTop + perTick;
                         if (element.scrollTop == to) {
                             window.webkit.messageHandlers.stopDemoScroll.postMessage('');
+                            isScrolled = true;
                             return;
                         }
                         scrollTo(element, to, duration - 10);
