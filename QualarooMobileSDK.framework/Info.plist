@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>BuildDate</key>
-	<string>Mon Oct 17 17:57:14 EEST 2016</string>
+	<string>Wed Oct 19 21:02:02 EEST 2016</string>
 	<key>BuildMachineOSBuild</key>
-	<string>16A319</string>
+	<string>16A323</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -19,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1.3</string>
+	<string>1.1.4</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
@@ -27,7 +27,7 @@
 		<string>iPhoneOS</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>158</string>
+	<string>162</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
