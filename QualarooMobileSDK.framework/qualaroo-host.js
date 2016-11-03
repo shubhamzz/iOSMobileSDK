@@ -8,6 +8,7 @@
 
 var QualarooHost = function() {};
 var isVertical = false;
+var isScrolled = false;
 
 QualarooHost.prototype = {
 
@@ -174,49 +175,53 @@ QualarooHost.prototype = {
         for (item of items) {
             if (item.onclick) return;
             item.onclick = function(event) {
-                setTimeout(function() {
-                    event.target.scrollIntoView();
-                }, 0);
+                event.target.scrollIntoView();
             }
         }
       }
     },
     demoScroll: function () {
       var box = document.getElementById("qual_ol_box");
-      if (box && isVertical) {
+      if (box && isVertical && !isScrolled) {
         window.webkit.messageHandlers.startDemoScroll.postMessage('');
         setTimeout(function() {
-            function scrollDown(element, to, duration) {
+            function scrollDown(element, to, difference) {
 
+              var oldDifference = difference;
               var difference = to - element.scrollTop;
-              var perTick = difference / duration * 10;
+              var perTick = 2;
 
-              if (difference - perTick <= box.offsetHeight) return;
+              if (oldDifference == difference) {
+                setTimeout(function () {
+                  scrollTo(box, 0, 1000);
+                }, 800);
+                return;
+              } else {
+                oldDifference = difference;
+              }
+
               setTimeout(function() {
                 element.scrollTop = element.scrollTop + perTick;
-                if (element.scrollTop == 0) return;
-                scrollDown(element, to, duration - 10);
+                scrollDown(element, to, oldDifference);
               }, 10);
             }
-            scrollDown(box, suggestedNewHeight, 2000);
-            setTimeout(function() {
-                function scrollTo(element, to, duration) {
+            scrollDown(box, suggestedNewHeight, 0);
+            function scrollTo(element, to, duration) {
 
-                    var difference = to - element.scrollTop;
-                    var perTick = difference / duration * 10;
+                var difference = to - element.scrollTop;
+                var perTick = difference / duration * 10;
 
-                    if (duration <= 0) return;
-                    setTimeout(function() {
-                        element.scrollTop = element.scrollTop + perTick;
-                        if (element.scrollTop == to) {
-                            window.webkit.messageHandlers.stopDemoScroll.postMessage('');
-                            return;
-                        }
-                        scrollTo(element, to, duration - 10);
-                    }, 10);
-                }
-            scrollTo(box, 0, 1000);
-            }, 2010);
+                if (duration <= 0) return;
+                setTimeout(function() {
+                    element.scrollTop = element.scrollTop + perTick;
+                    if (element.scrollTop == to) {
+                        window.webkit.messageHandlers.stopDemoScroll.postMessage('');
+                        isScrolled = true;
+                        return;
+                    }
+                    scrollTo(element, to, duration - 10);
+                }, 10);
+            }
         }, 800);
       }
     },
@@ -317,6 +322,7 @@ QualarooHost.prototype = {
 
     notifySurveyClosed: function() {
         isVertical = false;
+        isScrolled = false;
         window.webkit.messageHandlers.surveyClosed.postMessage('');
     },
 
